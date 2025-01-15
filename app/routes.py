@@ -7,18 +7,51 @@ def home():
     return render_template('base.html')
 
 
-@app.route('/signup', methods=['POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    data = request.form
-    participant = Participant(data['first_name'], data['last_name'], data['phone'], data['email'], data['occupation'], data['company'])
+    if request.method == 'POST':
+        data = request.form
+        participant = Participant(data['first_name'], data['last_name'], data['phone'], data['email'], data['occupation'], data['company'])
 
-    cursor = mysql.connection()
-    cursor.execute("""
-INSERT INTO participants (first_name, last_name, phone, email, occupation, company)
-VALUES (%s, %s, %s, %s, %s, %s)
-""", (participant.first_name, participant.last_name, participant.phone, participant.email, participant.occupation, participant.company))
-    mysql.connection.commit()
+        cursor = mysql.connection.cursor()
+        cursor.execute("""
+        INSERT INTO participants (first_name, last_name, phone, email, occupation, company)
+        VALUES (%s, %s, %s, %s, %s, %s)
+        """, (participant.first_name, participant.last_name, participant.phone, participant.email, participant.occupation, participant.company))
+        mysql.connection.commit()
+        cursor.close()
+
+        flash("Signup successful!")
+        return redirect(url_for('home'))
+    return render_template('signup.html')
+
+
+@app.route('/admin/dashboard', methods=['GET', 'POST'])
+def admin_dashboard():
+    if 'logged_in' not in session:
+        return redirect(url_for('admin_login'))
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM participants ORDER BY timestamp DESC")
+    participants = cursor.fetchall()
     cursor.close()
 
-    flash ("Registration successful!")
-    return redirect(url_for('signup'))
+    return render_template('dashboard.html', participants=participants)
+
+
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username == 'admin' and password == 'admin':
+            session['logged_in'] = True
+            return redirect(url_for('admin_dashboard'))
+        flash("Invalid credentials!")
+    return render_template('admin_login.html')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for('admin_login'))

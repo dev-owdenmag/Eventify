@@ -1,0 +1,16 @@
+<!-- templates/signup.html -->
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Event Signup</h1>
+    <form action="/signup" method="post">
+        <input type="text" name="first_name" placeholder="First Name" required>
+        <input type="text" name="last_name" placeholder="Last Name" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="occupation" placeholder="Occupation" required>
+        <input type="text" name="company" placeholder="Company" required>
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
+{% endblock %}
