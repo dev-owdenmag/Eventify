@@ -1,16 +1,27 @@
-<!-- templates/signup.html -->
-{% extends 'base.html' %}
-{% block content %}
-<div class="container">
-    <h1>Event Signup</h1>
-    <form action="/signup" method="post">
-        <input type="text" name="first_name" placeholder="First Name" required>
-        <input type="text" name="last_name" placeholder="Last Name" required>
-        <input type="text" name="phone" placeholder="Phone Number" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="occupation" placeholder="Occupation" required>
-        <input type="text" name="company" placeholder="Company" required>
-        <button type="submit">Sign Up</button>
-    </form>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventify - Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='images/event_logo.png') }}" alt="Event Logo" style="height: 50px;">
+        Eventify - Registration
+    </header>
+    <div class="signup-container">
+        <h1>Register for the Event</h1>
+        <form method="POST" action="{{ url_for('signup') }}">
+            <input type="text" name="first_name" placeholder="First Name" required>
+            <input type="text" name="last_name" placeholder="Last Name" required>
+            <input type="text" name="phone" placeholder="Phone Number" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="text" name="occupation" placeholder="Occupation" required>
+            <input type="text" name="company" placeholder="Company Name" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

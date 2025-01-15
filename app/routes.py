@@ -51,6 +51,34 @@ def admin_login():
     return render_template('admin_login.html')
 
 
+@app.route('/delete/<int:id>')
+def delete_participant(id):
+    cursor = mysql.connection.cursor()
+    cursor.execute("DELETE FROM participants WHERE id = %s", (id,))
+    mysql.connection.commit()
+    cursor.close()
+    flash("Participant deleted successfully.")
+    return redirect(url_for('admin_dashboard'))
+
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update_participant(id):
+    cursor = mysql.connection.cursor()
+    if request.method == 'POST':
+        data = request.form
+        cursor.execute("""
+            UPDATE participants SET first_name=%s, last_name=%s, phone=%s, email=%s, occupation=%s, company=%s WHERE id=%s
+        """, (data['first_name'], data['last_name'], data['phone'], data['email'], data['occupation'], data['company'], id))
+        mysql.connection.commit()
+        flash("Participant updated successfully.")
+        return redirect(url_for('admin_dashboard'))
+    
+    cursor.execute("SELECT * FROM participants WHERE id = %s", (id,))
+    participant = cursor.fetchone()
+    cursor.close()
+    return render_template('update.html', participant=participant)
+
+
+
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)

@@ -4,4 +4,4 @@ class Config:
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = 'Commando1+'
     MYSQL_DB = 'eventify'
-    MYSQL_CURSORCLASS = 'DictCursor()'
+    MYSQL_CURSORCLASS = 'DictCursor'

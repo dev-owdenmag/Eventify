@@ -1,0 +1,51 @@
+/* dashboard.css */
+
+.dashboard-container {
+    margin-top: 50px;
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.dashboard-table th {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+}
+
+.dashboard-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.actions button {
+    margin: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.actions .print-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.actions .update-btn {
+    background-color: #ffc107;
+    color: white;
+}
+
+.actions .delete-btn {
+    background-color: #dc3545;
+    color: white;
+}

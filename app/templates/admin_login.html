@@ -1,15 +1,19 @@
-{% extends "base.html" %}
-{% block content %}
-<section class="login-section">
-    <h2>Admin Login</h2>
-    <form action="/admin/login" method="POST" class="form">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
-        
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
-        
-        <button type="submit" class="btn">Login</button>
-    </form>
-</section>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventify - Admin Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_login.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Admin Login</h1>
+        <form method="POST" action="{{ url_for('admin_login') }}">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
