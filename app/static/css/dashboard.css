@@ -1,51 +1,99 @@
-/* dashboard.css */
-
-.dashboard-container {
-    margin-top: 50px;
-}
-
-.dashboard-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* General Styling for Dashboard */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header Styling */
+  h1 {
+    text-align: center;
+    color: #ffffff;
+    background-color: #007bff;
+    padding: 20px;
     border-radius: 8px;
-}
+    margin: 20px auto;
+    max-width: 80%;
+  }
 
-.dashboard-table th,
-.dashboard-table td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
+  h2 {
+    text-align: center;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 
-.dashboard-table th {
-    background-color: #007BFF;
-    color: white;
-    font-weight: bold;
-}
+  th, td {
+    text-align: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e0e0e0;
 
-.dashboard-table tr:hover {
-    background-color: #f1f1f1;
-}
+  }
 
-.actions button {
-    margin: 5px;
-    padding: 8px 12px;
+  td {
+    color: #333333;
     font-size: 14px;
-}
-
-.actions .print-btn {
-    background-color: #28a745;
-    color: white;
-}
-
-.actions .update-btn {
+  }
+  
+  
+  th {
+    background-color: #007bff;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Action Buttons */
+  .actions button {
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .actions .btn-update {
     background-color: #ffc107;
-    color: white;
-}
-
-.actions .delete-btn {
+  }
+  
+  .actions .btn-delete {
     background-color: #dc3545;
-    color: white;
-}
+  }
+  
+  .actions .btn-print {
+    background-color: #28a745;
+  }
+  
+  /* Hover Effects */
+  .actions button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    table {
+      font-size: 12px;
+    }
+  
+    th, td {
+      padding: 8px;
+    }
+  }
+  
