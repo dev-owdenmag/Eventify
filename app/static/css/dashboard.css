@@ -38,17 +38,16 @@ body {
     border-bottom: 1px solid #e0e0e0;
 
   }
-
-  td {
-    color: #333333;
-    font-size: 14px;
-  }
-  
   
   th {
     background-color: #007bff;
     color: #ffffff;
     text-transform: uppercase;
+    font-size: 14px;
+  }
+
+  td {
+    color: #333333;
     font-size: 14px;
   }
   
