@@ -30,13 +30,13 @@
                 {% for idx, participant in enumerate(participants) %}
                 <tr>
                     <td>{{ idx + 1 }}</td>
-                    <td>{{ participant[1] }}</td>
-                    <td>{{ participant[2] }}</td>
-                    <td>{{ participant[3] }}</td>
-                    <td>{{ participant[4] }}</td>
-                    <td>{{ participant[5] }}</td>
-                    <td>{{ participant[6] }}</td>
-                    <td>{{ participant[7] }}</td>
+                    <td>{{ participant['first_name'] }}</td>
+                    <td>{{ participant['last_name'] }}</td>
+                    <td>{{ participant['phone'] }}</td>
+                    <td>{{ participant['email'] }}</td>
+                    <td>{{ participant['occupation'] }}</td>
+                    <td>{{ participant['company'] }}</td>
+                    <td>{{ participant['timestamp'] }}</td>
                     <td class="actions">
                         <button class="print-btn">Print Neck Tag</button>
                         <button class="update-btn">Update</button>
