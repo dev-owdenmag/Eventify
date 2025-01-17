@@ -1,6 +1,8 @@
 from flask import render_template, request, redirect, url_for, flash, session
 from app import app, mysql
 from app.models import Participant
+from reportlab.pdfgen import canvas
+
 
 @app.route('/')
 def home():
@@ -49,6 +51,57 @@ def admin_login():
             return redirect(url_for('admin_dashboard'))
         flash("Invalid credentials!")
     return render_template('admin_login.html')
+
+@app.route('/print/<int:id>')
+def print_neck_tag():
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM participants WHERE id = %s", (id,))
+    participant = cursor.fetchone()
+    cursor.close()
+
+    if not participant:
+        flash("Participant not found!")
+        return redirect(url_for('admin_dashboard'))
+    
+    #Generate PDF
+    response = make_response()
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers('Content-Disposition') == f'inline; filename=neck_tag_{participant[0]}.pdf'
+
+    buffer =create_neck_tag(participant)
+    response.data = buffer.getvalue()
+    buffer.close()
+
+    return response
+
+def create_neck_tag(participant):
+    """
+    Generate pdf for neck tag using reportlab
+    """
+
+    from io import BytesIO
+    c = canvas.Canvas(buffer, pagesize=letter)
+
+    #Set dimentions and formatting
+    c.setFont('Helvetica', 14)
+    width, height = letter
+    x = 50 # X position
+    y = height - 100
+
+    #Add Participant details
+    c.drawString(x, y, "Neck Tag")
+    c.line(x, y-10, width - x, y-10) # Add horizontal line
+    y -= 30
+    c.sefFont('Helvetica-Bold', 12)
+    c.drawString(x, y, f"Name: {participant['first_name']} {participant['last_name']}")
+    y -= 20
+    c.drawString(x, y, f"Occupation: {participant['occupation']}")
+    y -= 20
+    c.drawString(x, y, f"Company: {participant['company']}")
+
+    #Save and close
+    buffer.seek(0)
+    return buffer
 
 
 @app.route('/delete/<int:id>')

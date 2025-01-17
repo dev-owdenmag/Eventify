@@ -38,7 +38,7 @@
                     <td>{{ participant['company'] }}</td>
                     <td>{{ participant['timestamp'] }}</td>
                     <td class="actions">
-                        <button class="print-btn">Print Neck Tag</button>
+                        <button class="print-btn" onclick="window.location.href='{{ url_for('print_neck_tag', id=participant[0]) }}'">Print Neck Tag</button>
                         <button class="update-btn">Update</button>
                         <button class="delete-btn">Delete</button>
                     </td>
