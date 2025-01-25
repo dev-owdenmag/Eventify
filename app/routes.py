@@ -42,7 +42,7 @@ def admin_dashboard():
     participants = [dict(zip(columns, row)) for row in cursor.fetchall()]  # Convert rows to dicts
     cursor.close()
 
-    return render_template('dashboard.html', participants=participants)
+    return render_template('dashboard.html', participant=participants)
 
 
 @app.route('/admin/login', methods=['GET', 'POST'])
