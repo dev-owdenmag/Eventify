@@ -38,6 +38,7 @@ def admin_dashboard():
 
     cursor = mysql.connection.cursor()
     cursor.execute("SELECT * FROM participants ORDER BY timestamp DESC")
+    rows = cursor.fetchall()
     columns = [col[0] for col in cursor.description]  # Get column names
     participants = [dict(zip(columns, row)) for row in cursor.fetchall()]  # Convert rows to dicts
     cursor.close()
